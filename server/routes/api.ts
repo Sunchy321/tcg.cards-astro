@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { User } from '../../src/types';
+import type { User } from '@/types';
 
 const api = new Hono();
 

@@ -1,12 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { SearchInput } from '../components/ui/SearchInput';
+import Layout from "@/layouts/Layout.astro";
+import { SearchInput } from "@/components/SearchInput";
 ---
 
 <Layout title="Welcome">
-    <div class="flex items-center justify-center min-h-screen">
-        <SearchInput client:load />
-    </div>
+  <div class="flex items-center justify-center min-h-screen py-8">
+    <SearchInput client:load />
+  </div>
 </Layout>
-
-
