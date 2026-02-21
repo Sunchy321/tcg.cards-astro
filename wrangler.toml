@@ -1,4 +1,4 @@
-name = "astro-hono-worker"
+name = "tcg-cards"
 main = "dist/_worker.js"
 compatibility_date = "2024-01-01"
 
@@ -19,3 +19,7 @@ ENVIRONMENT = "development"
 # [[durable_objects.bindings]]
 # name = "MY_DO"
 # class_name = "MyDurableObject"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"

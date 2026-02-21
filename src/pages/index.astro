@@ -1,15 +1,10 @@
----
-const title = 'Astro + Hono + Cloudflare Workers';
----
-
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>Welcome</title>
 		<style>
 			* {
 				margin: 0;
@@ -21,245 +16,31 @@ const title = 'Astro + Hono + Cloudflare Workers';
 				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 				min-height: 100vh;
-				padding: 2rem;
-			}
-
-			.container {
-				max-width: 1200px;
-				margin: 0 auto;
-			}
-
-			header {
-				text-align: center;
-				color: white;
-				margin-bottom: 3rem;
-			}
-
-			h1 {
-				font-size: 3rem;
-				margin-bottom: 1rem;
-				text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-			}
-
-			.subtitle {
-				font-size: 1.2rem;
-				opacity: 0.9;
-			}
-
-			.cards {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-				gap: 2rem;
-				margin-bottom: 2rem;
-			}
-
-			.card {
-				background: white;
-				border-radius: 12px;
-				padding: 2rem;
-				box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-			}
-
-			.card h2 {
-				color: #667eea;
-				margin-bottom: 1rem;
-				font-size: 1.5rem;
-			}
-
-			.endpoint {
-				background: #f7fafc;
-				padding: 0.75rem;
-				border-radius: 6px;
-				margin: 0.5rem 0;
-				font-family: 'Courier New', monospace;
-				font-size: 0.9rem;
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
-			}
-
-			.endpoint code {
-				color: #2d3748;
-			}
-
-			button {
-				background: #667eea;
-				color: white;
-				border: none;
-				padding: 0.5rem 1rem;
-				border-radius: 6px;
-				cursor: pointer;
-				font-size: 0.9rem;
-				transition: background 0.2s;
-			}
-
-			button:hover {
-				background: #5a67d8;
-			}
-
-			button:disabled {
-				background: #cbd5e0;
-				cursor: not-allowed;
-			}
-
-			.response {
-				margin-top: 1rem;
-				padding: 1rem;
-				background: #edf2f7;
-				border-radius: 6px;
-				border-left: 4px solid #667eea;
-				display: none;
-			}
-
-			.response.show {
-				display: block;
-			}
-
-			.response pre {
-				font-family: 'Courier New', monospace;
-				font-size: 0.85rem;
-				overflow-x: auto;
-				white-space: pre-wrap;
-				word-wrap: break-word;
-			}
-
-			.error {
-				border-left-color: #f56565;
-			}
-
-			.features {
-				background: white;
-				border-radius: 12px;
+				justify-content: center;
 				padding: 2rem;
-				box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 			}
 
-			.features h2 {
-				color: #667eea;
-				margin-bottom: 1.5rem;
+			input[type="text"] {
+				width: 500px;
+				max-width: 90vw;
+				padding: 1.5rem;
+				font-size: 1.2rem;
+				border: none;
+				border-radius: 12px;
+				outline: none;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+				transition: all 0.2s;
 			}
 
-			.features ul {
-				list-style: none;
-			}
-
-			.features li {
-				padding: 0.75rem 0;
-				border-bottom: 1px solid #e2e8f0;
-			}
-
-			.features li:last-child {
-				border-bottom: none;
-			}
-
-			.features li::before {
-				content: "✓";
-				color: #48bb78;
-				font-weight: bold;
-				margin-right: 0.5rem;
+			input[type="text"]:focus {
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+				transform: translateY(-2px);
 			}
 		</style>
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h1>🚀 {title}</h1>
-				<p class="subtitle">Frontend-Backend Separation Architecture | Deployed on Cloudflare Workers</p>
-			</header>
-
-			<div class="cards">
-				<div class="card">
-					<h2>📡 API Endpoints</h2>
-					<p style="margin-bottom: 1rem; color: #4a5568;">RESTful API Interface</p>
-
-					<div class="endpoint">
-						<code>GET /api/hello</code>
-						<button onclick="testEndpoint('/api/hello', 'api-hello')">Test</button>
-					</div>
-					<div id="api-hello" class="response"></div>
-
-					<div class="endpoint">
-						<code>GET /api/users</code>
-						<button onclick="testEndpoint('/api/users', 'api-users')">Test</button>
-					</div>
-					<div id="api-users" class="response"></div>
-
-					<div class="endpoint">
-						<code>GET /api/users/1</code>
-						<button onclick="testEndpoint('/api/users/1', 'api-user-1')">Test</button>
-					</div>
-					<div id="api-user-1" class="response"></div>
-				</div>
-
-				<div class="card">
-					<h2>⚙️ Service Endpoints</h2>
-					<p style="margin-bottom: 1rem; color: #4a5568;">System Service Interface</p>
-
-					<div class="endpoint">
-						<code>GET /service/status</code>
-						<button onclick="testEndpoint('/service/status', 'service-status')">Test</button>
-					</div>
-					<div id="service-status" class="response"></div>
-
-					<div class="endpoint">
-						<code>GET /service/info</code>
-						<button onclick="testEndpoint('/service/info', 'service-info')">Test</button>
-					</div>
-					<div id="service-info" class="response"></div>
-
-					<div class="endpoint">
-						<code>GET /service/ping</code>
-						<button onclick="testEndpoint('/service/ping', 'service-ping')">Test</button>
-					</div>
-					<div id="service-ping" class="response"></div>
-				</div>
-			</div>
-
-			<div class="features">
-				<h2>✨ Tech Stack Features</h2>
-				<ul>
-					<li><strong>Astro</strong> - Modern static site generator with SSR support</li>
-					<li><strong>Hono</strong> - Ultra-fast web framework designed for edge computing</li>
-					<li><strong>Cloudflare Workers</strong> - Global distributed edge computing platform</li>
-					<li><strong>Frontend-Backend Separation</strong> - Independent API and Service endpoints</li>
-					<li><strong>TypeScript</strong> - Full type support</li>
-					<li><strong>Zero Cold Start</strong> - Workers provide instant response</li>
-					<li><strong>Auto Scaling</strong> - Automatically adjusts resources based on traffic</li>
-				</ul>
-			</div>
-		</div>
-
-		<script is:inline>
-			async function testEndpoint(path, elementId) {
-				const element = document.getElementById(elementId);
-				const button = window.event?.target;
-
-				if (!element || !button) return;
-
-				button.disabled = true;
-				button.textContent = 'Loading...';
-				element.classList.remove('show', 'error');
-
-				try {
-					// In development environment, use worker port
-					const baseUrl = window.location.hostname === 'localhost'
-						? 'http://localhost:8787'
-						: '';
-
-					const response = await fetch(baseUrl + path);
-					const data = await response.json();
-
-					element.innerHTML = '<strong>Status Code:</strong> ' + response.status + '<br><br><pre>' + JSON.stringify(data, null, 2) + '</pre>';
-					element.classList.add('show');
-				} catch (error) {
-					const message = error instanceof Error ? error.message : String(error);
-					element.innerHTML = '<strong>Error:</strong><br><pre>' + message + '</pre>';
-					element.classList.add('show', 'error');
-				} finally {
-					button.disabled = false;
-					button.textContent = 'Test';
-				}
-			}
-		</script>
+		<input type="text" id="userInput" placeholder="Enter something here..." autofocus />
 	</body>
 </html>

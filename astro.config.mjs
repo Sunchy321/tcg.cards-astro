@@ -4,8 +4,10 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
-  adapter: cloudflare({
-    mode: 'directory',
-  }),
+    build: {
+        inlineStylesheets: 'never',
+    },
+    output: 'server',
+    adapter: cloudflare({
+    }),
 });
