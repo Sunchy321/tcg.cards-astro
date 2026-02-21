@@ -1,46 +1,16 @@
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Welcome</title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
+---
+import Layout from '../layouts/Layout.astro';
+---
 
-			body {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-				min-height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				padding: 2rem;
-			}
+<Layout title="Welcome">
+    <div class="flex items-center justify-center min-h-screen">
+        <input
+            type="text"
+            id="userInput"
+            autofocus
+            class="w-[90%] md:w-[75%] px-6 py-6 text-xl bg-white border-none rounded-xl outline-none shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-200 focus:shadow-[0_20px_60px_rgba(0,0,0,0.4)] focus:-translate-y-0.5"
+        />
+    </div>
+</Layout>
 
-			input[type="text"] {
-				width: 500px;
-				max-width: 90vw;
-				padding: 1.5rem;
-				font-size: 1.2rem;
-				border: none;
-				border-radius: 12px;
-				outline: none;
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-				transition: all 0.2s;
-			}
 
-			input[type="text"]:focus {
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-				transform: translateY(-2px);
-			}
-		</style>
-	</head>
-	<body>
-		<input type="text" id="userInput" placeholder="Enter something here..." autofocus />
-	</body>
-</html>
